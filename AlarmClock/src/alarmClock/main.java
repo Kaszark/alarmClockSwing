@@ -7,7 +7,7 @@ public class main {
 		//This is the beginning of the alarm clock program.
 		//The base idea of this main method is just to activate the alarm clock GUI then end the program.
 		
-		
+		AlarmGUI al = new AlarmGUI();
 	}
 
 }
