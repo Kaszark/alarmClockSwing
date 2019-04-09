@@ -1,13 +1,13 @@
 package alarmClock;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Scanner;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -19,7 +19,6 @@ import javax.swing.Timer;
 public class ClockPane extends JPanel {
 	private DigitPane month;
 	private DigitPane day;
-	private DigitPane year;
 	private DigitPane hour;
 	private DigitPane min;
 	private DigitPane second;
@@ -59,12 +58,19 @@ public class ClockPane extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					Calendar cal = GregorianCalendar.getInstance();
 					
-					month.setValue(cal.get(Calendar.MONTH) + 1);
+					month.setValue(cal.get(Calendar.MONTH) + 1);					
 					day.setValue(cal.get(Calendar.DATE));
 					hour.setValue(cal.get(GregorianCalendar.HOUR_OF_DAY));
 					min.setValue(cal.get(GregorianCalendar.MINUTE));
 					second.setValue(cal.get(GregorianCalendar.SECOND));
 					
+					ArrayList<String> values = new ArrayList<>();
+					values.add(new Integer(month.getValue()).toString());
+					values.add(new Integer(day.getValue()).toString());
+					values.add(new Integer(hour.getValue()).toString());
+					values.add(new Integer(min.getValue()).toString());
+					values.add(new Integer(second.getValue()).toString());
+					alarmCompare(values);
 					if(tick % 2 == 1) {
 						seperator[0].setText(":");
 						seperator[1].setText(":");
@@ -92,6 +98,25 @@ public class ClockPane extends JPanel {
 		JDialog dialog = err.createDialog(err, "Error Occured Please Retry");
 		
 		dialog.setVisible(true);
+	}
+	
+	@SuppressWarnings("resource")
+	private void alarmCompare(ArrayList<String> v) {
+		try {
+			FileReader file = new FileReader("Alarms.csv");
+			Scanner scan = new Scanner(file);
+			
+			ArrayList<Integer> info = new ArrayList<>();
+			
+			boolean match = false;
+			while(scan.hasNext())
+			{
+				System.out.println(scan.next());
+			}
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

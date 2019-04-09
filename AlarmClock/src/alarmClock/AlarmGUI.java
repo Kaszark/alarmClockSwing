@@ -1,11 +1,7 @@
 package alarmClock;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.Timer;
-
-import java.util.*;
 
 @SuppressWarnings("serial")
 public class AlarmGUI extends JFrame {
