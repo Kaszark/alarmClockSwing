@@ -1,17 +1,16 @@
 package alarmClock;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.LayoutManager;
 //import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-//import java.util.Calendar;
-//import java.util.GregorianCalendar;
-import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
 import javax.swing.*;
 
@@ -31,8 +30,8 @@ public class AlarmSetting extends JPanel{
 				public void actionPerformed(ActionEvent e)
 				{
 					JFrame alarmSet = new JFrame();
-					alarmSet.setSize(325, 125);
-					alarmSet.add(settingInfo());
+					alarmSet.setSize(375, 125);
+					alarmSet.add(settingInfo(alarmSet));
 //					alarmSet.pack();
 					alarmSet.setVisible(true);
 				}
@@ -52,7 +51,7 @@ public class AlarmSetting extends JPanel{
 		dialog.setVisible(true);
 	}
 	
-	public JPanel settingInfo() {
+	public JPanel settingInfo(JFrame aS) {
 		JPanel p = new JPanel();
 		
 		JTextField month = new JTextField(4);
@@ -85,7 +84,7 @@ public class AlarmSetting extends JPanel{
 		p.add(s);
 		p.add(sec);
 				
-		JTextField mes = new JTextField(4);
+		JTextField mes = new JTextField(20);
 		JLabel g = new JLabel("Message", SwingConstants.LEFT);
 		p.add(g);
 		p.add(mes);
@@ -94,12 +93,41 @@ public class AlarmSetting extends JPanel{
 		p.add(set, BorderLayout.CENTER);
 		set.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Add CSV file creation here!!!!
+
+				try {
+					FileWriter write = new FileWriter("Alarms.csv", true);
+					@SuppressWarnings("resource")
+					BufferedWriter writer = new BufferedWriter(write);
+					PrintWriter pw = new PrintWriter(writer);
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append(month.getText());
+					sb.append(',');
+					sb.append(day.getText());
+					sb.append(',');
+					sb.append(year.getText());
+					sb.append(',');
+					sb.append(hour.getText());
+					sb.append(',');
+					sb.append(min.getText());
+					sb.append(',');
+					sb.append(sec.getText());
+					sb.append(',');
+					sb.append(mes.getText());
+
+					
+					pw.println(sb.toString());
+					pw.close();
+					aS.dispose();
+				}
+				catch(Exception ex) {
+					ex.printStackTrace();
+				}
 			}
+			
 		});
 		
 		return p;
 	}
-	
 
 }

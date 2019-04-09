@@ -17,6 +17,9 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class ClockPane extends JPanel {
+	private DigitPane month;
+	private DigitPane day;
+	private DigitPane year;
 	private DigitPane hour;
 	private DigitPane min;
 	private DigitPane second;
@@ -27,12 +30,21 @@ public class ClockPane extends JPanel {
 	public ClockPane() {
 		try
 		{
-			//setLayout(new BorderLayout());
-			//JLabel clock = new JLabel();
+			Calendar cal = GregorianCalendar.getInstance();
+			
+			month = new DigitPane();
+			day = new DigitPane();			
+			int ytemp = cal.get(Calendar.YEAR);
+			String plz = Integer.toString(ytemp);
+			JLabel year = new JLabel(plz);
 			hour = new DigitPane();
 			min = new DigitPane();
 			second = new DigitPane();
 			seperator = new JLabel[] {new JLabel(":"), new JLabel(":")};
+			
+			add(month);
+			add(day);
+			add(year);
 			
 			add(hour);
 			add(seperator[0]);
@@ -47,6 +59,8 @@ public class ClockPane extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					Calendar cal = GregorianCalendar.getInstance();
 					
+					month.setValue(cal.get(Calendar.MONTH) + 1);
+					day.setValue(cal.get(Calendar.DATE));
 					hour.setValue(cal.get(GregorianCalendar.HOUR_OF_DAY));
 					min.setValue(cal.get(GregorianCalendar.MINUTE));
 					second.setValue(cal.get(GregorianCalendar.SECOND));
