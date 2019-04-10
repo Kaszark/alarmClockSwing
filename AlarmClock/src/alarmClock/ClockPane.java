@@ -67,6 +67,7 @@ public class ClockPane extends JPanel {
 					ArrayList<String> values = new ArrayList<>();
 					values.add(new Integer(month.getValue()).toString());
 					values.add(new Integer(day.getValue()).toString());
+					values.add(plz);
 					values.add(new Integer(hour.getValue()).toString());
 					values.add(new Integer(min.getValue()).toString());
 					values.add(new Integer(second.getValue()).toString());
@@ -105,13 +106,23 @@ public class ClockPane extends JPanel {
 		try {
 			FileReader file = new FileReader("Alarms.csv");
 			Scanner scan = new Scanner(file);
-			
-			ArrayList<Integer> info = new ArrayList<>();
-			
-			boolean match = false;
+			ArrayList<String> com = new ArrayList<>();
+			com.equals(v);		
 			while(scan.hasNext())
 			{
-				System.out.println(scan.next());
+				ArrayList<String> info = new ArrayList<>();
+				String grab = scan.next();
+				String[] items = grab.split(",");
+				for(int i = 0; i < items.length-1; i++)
+				{
+					info.add(items[i]);
+				}
+				//System.out.println(info);
+				//System.out.println(v);
+				if(v.equals(info))
+				{
+					JOptionPane.showMessageDialog(null, items[6], "ALERT: ", JOptionPane.INFORMATION_MESSAGE);
+				}
 			}
 			
 		} catch (FileNotFoundException e) {

@@ -113,7 +113,7 @@ public class AlarmSetting extends JPanel{
 					sb.append(mes.getText());
 
 					
-					pw.println(sb.toString());
+					pw.print(sb.toString());
 					pw.close();
 					aS.dispose();
 				}
