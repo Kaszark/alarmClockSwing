@@ -27,8 +27,9 @@ public class AlarmSetting extends JPanel{
 				public void actionPerformed(ActionEvent e)
 				{
 					JFrame alarmSet = new JFrame();
-					alarmSet.setSize(375, 125);
+					alarmSet.setSize(700, 100);
 					alarmSet.add(settingInfo(alarmSet));
+					alarmSet.setLocationRelativeTo(getParent());
 //					alarmSet.pack();
 					alarmSet.setVisible(true);
 				}
@@ -85,6 +86,8 @@ public class AlarmSetting extends JPanel{
 		JLabel g = new JLabel("Message", SwingConstants.LEFT);
 		p.add(g);
 		p.add(mes);
+		
+		
 
 		JButton set = new JButton("Set Alarm!");
 		p.add(set, BorderLayout.CENTER);
@@ -113,7 +116,7 @@ public class AlarmSetting extends JPanel{
 					sb.append(mes.getText());
 
 					
-					pw.print(sb.toString());
+					pw.print(sb.toString() +"\n");
 					pw.close();
 					aS.dispose();
 				}

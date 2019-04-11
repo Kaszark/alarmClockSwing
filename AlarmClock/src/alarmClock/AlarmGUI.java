@@ -31,7 +31,7 @@ public class AlarmGUI extends JFrame {
 				frame.setLayout(new BorderLayout());
 				frame.add(new ClockPane(), BorderLayout.NORTH);
 				frame.add(new AlarmSetting(), BorderLayout.CENTER);
-				frame.setSize(150, 100);
+				frame.setSize(400, 100);
 				frame.setLocationRelativeTo(null);
 				frame.setVisible(true);
 			}
